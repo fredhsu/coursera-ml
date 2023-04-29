@@ -67,6 +67,24 @@ fn compute_model_output(x: Vec<f32>, w: f32, b: f32) -> Vec<f32> {
     f_wb
 }
 
+fn compute_cost(x: Vec<f32>, y: Vec<f32>, w: f32, b: f32) -> f32 {
+    let m = x.len() as f32;
+    let mut cost_sum = 0.0;
+    for (i, x_i) in x.iter().enumerate() {
+        let f_wb = w * x_i + b;
+        let cost = (f_wb - y[i]).powi(2);
+        cost_sum += cost;
+    }
+    (1.0 / (2.0 * m)) * cost_sum
+}
+fn c1_w1_lab03() {
+    let x_train = vec![1.0, 1.7, 2.0, 2.5, 3.0, 3.2];
+    let y_train = vec![250.0, 300.0, 480.0, 430.0, 630.0, 730.0];
+    let total_cost = compute_cost(x_train, y_train, 209.0, 2.4);
+    dbg!(total_cost);
+}
+
 fn main() {
     c1_w1_lab02();
+    c1_w1_lab03();
 }
